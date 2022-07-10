@@ -32,27 +32,23 @@ Number.prototype.decodeOdd = function(bitsNum) {
 
 Number.prototype.toAlignedBinary = function(bitsNum) {
 	var result = this.toString(2);
-	while(result.length < bitsNum) { result = '0' + result; }
+	while (result.length < bitsNum) { result = '0' + result; }
 	return result;
 }
 
 function getRedundantBitsNumber(bitsNum) {
-	var result = 0;
-	while (Math.pow(2, result) < bitsNum) {
-		result++;
-	}
-	return result;
+	return Math.ceil(Math.log2(bitsNum));
 }
 
-function computeParity(startBitIndex, partition, bitsNum, data) {
+function computeParity(bitIndex, partition, bitsNum, data) {
 	var parity = 0;
-	while (startBitIndex < bitsNum) {
+	while (bitIndex < bitsNum) {
 		for (var i = 0; i < partition; i++) {
-			var byteIndex = Math.floor(startBitIndex / 8);
-			parity ^= (data[byteIndex] >> (startBitIndex % 8)) & 1;
-			startBitIndex++;
+			var byteIndex = Math.floor(bitIndex / 8);
+			parity ^= (data[byteIndex] >> (bitIndex % 8)) & 1;
+			bitIndex++;
 		}
-		startBitIndex += partition;
+		bitIndex += partition;
 	}
 	return parity;
 }
