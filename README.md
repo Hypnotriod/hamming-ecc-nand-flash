@@ -13,5 +13,5 @@ Redundant bit index | Partitions
 ```
 For NAND Flash memory final grouping of redundant even and odd bits of ECC code is:
 ```text
-{odd2, even2, odd1, even1, odd0, even0}
+ecc[5,0] = {odd2, even2, odd1, even1, odd0, even0}
 ```
